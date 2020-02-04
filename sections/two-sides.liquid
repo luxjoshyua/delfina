@@ -1,0 +1,212 @@
+<style>
+  	#shopify-section-{{ section.id }} .home-banner--text-{{ section.settings.text_position }} {
+		background-color: {{ section.settings.bcg_color }};
+      	{% if section.settings.image_text %}
+		background-image: url({{ section.settings.image_text | img_url: '1024x' }});
+      	{% endif %}
+	}
+
+	#shopify-section-{{ section.id }} .home-banner-top .banner--image-container {
+		background-image: url({{ section.settings.image | img_url: '1024x' }});		
+	}
+
+  	{% unless section.settings.video %}
+	#shopify-section-{{ section.id }} .home-banner-top .banner--image-container:hover {
+		background-image: url({{ section.settings.image_hover | img_url: '1024x' }});		
+	}
+  	{% endunless %}
+
+</style>
+
+<div class="home-banner home-banner-top home-banner--text-{{ section.settings.text_position }} banner--text-{{ section.settings.text_position }}">
+
+
+			<div class="banner--text-side">
+				<div class="banner--text-container text-center">
+					<h2 class="h1"><a href="{{ section.settings.button_link }}">{{ section.settings.title }}</a></h2>
+					<p>{{ section.settings.subheading }}</p>
+                  	{% if section.settings.button_link.size > 0 and section.settings.button_text.size > 0 %}
+					<a href="{{ section.settings.button_link }}" class="btn btn-full">{{ section.settings.button_text }}</a>
+                    {% endif %}
+				</div>
+			</div>
+  
+  			{% unless section.settings.slideshow %}
+  			<div href="{{ section.settings.button_link }}" class="banner--image-container">
+              
+              {% if section.settings.video %}
+  				<img data-popup-id="#{{ section.id }}-popup-id" class="popup-trigger video-trigger" src="{{ 'video_icon.png' | asset_url }}">
+              {% endif %}
+  			</div>
+  			{% endunless %}
+  
+  			{% if section.settings.slideshow %}
+  			<div href="{{ section.settings.button_link }}" class="banner--slideshow">
+  			  {% if section.settings.slideshow %}
+              	{% for block in section.blocks %}
+              	<div style="background-image: url({{ block.settings.image | img_url: '1000x' }})" class="banner--image-element"></div>
+              	{% endfor %}
+              {% endif %}
+  			</div>
+  			{% endif %}
+
+</div>
+
+<div class="preload">
+   <img src="{{ section.settings.image | img_url: '1024x' }}" width="1" height="1" alt="Image 01" />
+   <img src="{{ section.settings.image_thover | img_url: '1024x'}}" width="1" height="1" alt="Image 02" />
+</div>
+
+{% if section.settings.video %}
+<div id="{{ section.id }}-popup-id" class="overlay">
+    
+    <div class="popup__video-container">
+    <span data-popup-id="#{{ section.id }}-popup-id" class="popup-trigger white-trigger">
+    	X
+    </span>
+
+      <video class="popup-video" webkit-playsinline playsinline controls>
+        <source src="{{ section.settings.video_url_mp4 }}" type="video/mp4">
+        <source src="{{ section.settings.video_url_webm }}" type="video/webm">
+        Your browser does not support the video tag. I suggest you upgrade your browser.
+      </video>
+  	</div>
+
+</div>
+{% endif %}
+
+
+{% schema %}
+  {
+    "name": "Image with text hover",
+    "settings": [
+      {
+         "type":      "select",
+         "id":        "text_position",
+         "label":     "Text position",
+         "options": [
+           {
+             "group": "Text position",
+             "value": "left",
+             "label": "Left"
+           },
+           {
+             "group": "Text position",
+             "value": "right",
+             "label": "Right"
+           }
+         ],
+         "default":   "left",
+         "info":      "Left"
+	  },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_hover",
+        "label": "Image on hover"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_text",
+        "label": "Background image"
+      },
+      {
+        "type": "color",
+        "id": "bcg_color",
+        "label": "Background color",
+        "default": "#E0F1FF"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Change the heading"
+      },
+      {
+        "type": "textarea",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam commodo, metus id consectetur congue, ex tortor facilisis nunc, aliquam sollicitudin eros justo ac risus. "
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text",
+        "default": "Shop now"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      },
+      {
+        "type": "header",
+        "content": "Video"
+      },
+      {
+        "type": "checkbox",
+        "id": "video",
+        "label": "Show video"
+      },
+      {
+        "type": "text",
+        "id": "video_url_mp4",
+        "label": "Video URL in MP4"
+      },
+      {
+        "type": "text",
+        "id": "video_url_webm",
+        "label": "Video URL in WEBM"
+      },
+      {
+        "type": "header",
+        "content": "Slideshow"
+      },
+      {
+        "type": "checkbox",
+        "id": "slideshow",
+        "label": "Show slideshow ?",
+        "default": false
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": {
+          "de": "Foto-Slide",
+          "en": "Image slide",
+          "es": "Diapositiva de imagen",
+          "fr": "Diapositive (image)",
+          "it": "Slide immagine",
+          "ja": "画像スライド",
+          "pt-BR": "Slide de imagem"
+        },
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": {
+              "de": "Foto",
+              "en": "Image",
+              "es": "Imagen",
+              "fr": "Image",
+              "it": "Immagine",
+              "ja": "画像",
+              "pt-BR": "Imagem"
+            }
+          }
+		]
+	   }
+	],
+    "presets": [
+      {
+        "name": "Image with text hover",
+        "category": "Box"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,34 @@
+{% assign size_chart = '' %}
+{% for tag in product.tags %}
+	{% if tag == "sc_men" %}
+		{% assign size_chart = 'men' %}
+	{% endif %}
+	{% if tag == "sc_women" %}
+		{% assign size_chart = 'women' %}
+	{% endif %}
+{% endfor %}
+
+{% unless size_chart == ''%}
+<p data-popup-id="#size-chart-popup-id" class="size-chart__trigger uppercase popup-trigger">Size chart</p>
+    
+<div id="size-chart-popup-id" class="overlay">
+	
+  <div class="popup">
+    
+    <span data-popup-id="#size-chart-popup-id" class="popup-trigger">
+    	X
+    </span>
+    
+    <div class="popup__inner">
+    {% if size_chart == "men" %}
+      <img src="{{ 'size_men.png' | asset_url }}">
+    {% endif %}
+    {% if size_chart == "women" %}
+      <img src="{{ 'size_women.png' | asset_url }}">
+    {% endif %}
+    </div>
+
+  </div>
+</div>
+
+{% endunless %}

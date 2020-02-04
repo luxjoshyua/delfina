@@ -1,0 +1,162 @@
+<div class="page-width">
+  
+    {% if section.settings.title != blank %}
+      <div class="section-header text-center">
+        <h2>{{ section.settings.title | escape }}</h2>
+      </div>
+    {% endif %}
+  
+</div>
+
+{% for block in section.blocks %}
+  <style>
+      #shopify-block-{{ block.id }} .home-banner--text-{{ block.settings.text_position }} {
+          background-color: {{ block.settings.bcg_color }};
+          {% if block.settings.image_text %}
+          background-image: url({{ block.settings.image_text | img_url: '1024x' }});
+          {% endif %}
+      }
+
+      #shopify-block-{{ block.id }} .home-banner-top .banner--image-container {
+          background-image: url({{ block.settings.image | img_url: '1024x' }});		
+      }
+
+
+  </style>
+
+  <div id="shopify-block-{{ block.id }}">
+    <div class="home-banner home-banner-top home-banner--text-{{ block.settings.text_position }} banner--text-{{ block.settings.text_position }}">
+
+
+      <div class="banner--text-side">
+        <div class="banner--text-container">
+          <h2 class="h1"><a href="{{ block.settings.button_link }}">{{ block.settings.title }}</a></h2>
+          <p>{{ block.settings.subheading }}</p>
+          {% if block.settings.button_link.size > 0 and block.settings.button_text.size > 0 %}
+          <a href="{{ block.settings.button_link }}" class="btn btn-full">{{ block.settings.button_text }}</a>
+          {% endif %}
+        </div>
+      </div>
+
+      <span href="{{ block.settings.button_link }}" class="banner--image-container"></span>
+
+
+    </div>
+  </div>
+
+  <div class="preload">
+     <img src="{{ block.settings.image | img_url: '1024x' }}" width="1" height="1" alt="Image 01" />
+     <img src="{{ block.settings.image_thover | img_url: '1024x'}}" width="1" height="1" alt="Image 02" />
+  </div>
+{% endfor %}
+
+{% schema %}
+  {
+    "name": "Range banners",
+	"class": "section__range-banners",
+    "settings": [
+	  {
+        "type": "text",
+        "id": "title",
+        "label": {
+          "de": "Titel",
+          "en": "Heading",
+          "es": "Título",
+          "fr": "En-tête",
+          "it": "Heading",
+          "ja": "見出し",
+          "pt-BR": "Título"
+        },
+        "default": {
+          "de": "Textspalten mit Fotos",
+          "en": "Text columns with images",
+          "es": "Col. de texto con imagen",
+          "fr": "Colonnes de texte avec images",
+          "it": "Colonne di testo con foto",
+          "ja": "画像付きテキスト列",
+          "pt-BR": "Colunas de texto com imagens"
+        }
+      }
+	],
+    "blocks": [
+      {
+        "type": "section",
+        "name": {
+          "de": "Foto-Slide",
+          "en": "Image + text",
+          "es": "Diapositiva de imagen",
+          "fr": "Diapositive (image)",
+          "it": "Slide immagine",
+          "ja": "画像スライド",
+          "pt-BR": "Slide de imagem"
+        },
+        "settings": [
+            {
+               "type":      "select",
+               "id":        "text_position",
+               "label":     "Text position",
+               "options": [
+                 {
+                   "group": "Text position",
+                   "value": "left",
+                   "label": "Left"
+                 },
+                 {
+                   "group": "Text position",
+                   "value": "right",
+                   "label": "Right"
+                 }
+               ],
+               "default":   "left",
+               "info":      "Left"
+            },
+            {
+              "type": "image_picker",
+              "id": "image",
+              "label": "Image"
+            },
+            {
+              "type": "image_picker",
+              "id": "image_text",
+              "label": "Background image"
+            },
+            {
+              "type": "color",
+              "id": "bcg_color",
+              "label": "Background color",
+              "default": "#E0F1FF"
+            },
+            {
+              "type": "text",
+              "id": "title",
+              "label": "Heading",
+              "default": "Change the heading"
+            },
+            {
+              "type": "textarea",
+              "id": "subheading",
+              "label": "Subheading",
+              "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam commodo, metus id consectetur congue, ex tortor facilisis nunc, aliquam sollicitudin eros justo ac risus. "
+            },
+            {
+              "type": "text",
+              "id": "button_text",
+              "label": "Button text",
+              "default": "Shop now"
+            },
+            {
+              "type": "url",
+              "id": "button_link",
+              "label": "Button link"
+            }
+		]
+      }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

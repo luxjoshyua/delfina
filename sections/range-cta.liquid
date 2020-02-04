@@ -1,0 +1,49 @@
+<div class="text-center">
+
+  <h2>{{ section.settings.title }}</h2>
+  <a href="{{ section.settings.url }}" class="btn btn--inverted">Get started</a>
+  
+</div>
+
+
+{% schema %}
+  {
+    "name": "CTA banner",
+	"class": "section__cta-banner",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": {
+          "de": "Titel",
+          "en": "Heading",
+          "es": "Título",
+          "fr": "En-tête",
+          "it": "Heading",
+          "ja": "見出し",
+          "pt-BR": "Título"
+        },
+        "default": {
+          "de": "Textspalten mit Fotos",
+          "en": "Heading text",
+          "es": "Col. de texto con imagen",
+          "fr": "Colonnes de texte avec images",
+          "it": "Colonne di testo con foto",
+          "ja": "画像付きテキスト列",
+          "pt-BR": "Colunas de texto com imagens"
+        }
+      },
+	  {
+        "type": "url",
+        "id": "url",
+        "label": "URL"
+      }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

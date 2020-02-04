@@ -1,0 +1,36 @@
+<div class="page-width">
+  <div class="grid">
+    <div class="grid__item large-up--one-half">
+      {% for article in blogs['news'].articles limit: 1 %}
+      <a href="{{ article.url }}" class="home-blog rectangle">
+          <div class="home-blog--image" style="background-image: url({{ article.image | img_url: '600x' }})"></div>
+          <div class="home-blog--meta">
+            <p class="title home-blog--title">{{ article.title }}</p>
+            <p class="home-blog--author">By {{ article.author }}</p>
+          </div>
+      </a>
+      {% endfor %}
+    </div>
+    <div class="grid__item large-up--one-half">
+      <div class="grid instagram-block text-center">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Home blog & Instagram",
+	"class": "home__blog-instagram",
+    "settings": [
+
+    ],
+    "presets": [
+      {
+        "name": "Home blog & Instagram",
+        "category": "Box"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,449 @@
+{%- assign formId = 'ContactForm' -%}
+  {% form 'contact', id: contact_form %}
+
+<style>
+  	#shopify-section-{{ section.id }} .home-banner--text-{{ section.settings.text_position }} {
+		background-color: {{ section.settings.bcg_color }};
+      	{% if section.settings.image_text %}
+		background-image: url({{ section.settings.image_text | img_url: '1024x' }});
+      	{% endif %}
+	}
+
+  	{% if form.posted_successfully? %}
+  	#shopify-section-{{ section.id }} .home-banner-top .banner--image-container {
+		background-image: url({{ 'Thankyou.jpg' | asset_img_url: '1024x' }});		
+	}
+  	{% else %}
+	#shopify-section-{{ section.id }} .home-banner-top .banner--image-container {
+		background-image: url({{ section.settings.image | img_url: '1024x' }});		
+	}
+
+	#shopify-section-{{ section.id }} .home-banner-top .banner--image-container:hover {
+		background-image: url({{ section.settings.image_hover | img_url: '1024x' }});		
+	}
+  	{% endif %}
+
+</style>
+
+<div class="home-banner home-banner-top home-banner--text-{{ section.settings.text_position }} banner--text-{{ section.settings.text_position }}">
+
+
+			<div class="banner--text-side">
+				<div class="banner--text-container">
+                  	{% if form.posted_successfully? %}
+                  		<h2 class="h1">Thank you!</h2>
+                  		<p>We will get back to you as soon as possible if we need anything else from you and if not, we will send some designs your way in the next 24-48 hours ☺</p>
+                  		<p>Feel free to get in touch direct for any questions in the interim <a class="get-started__confirmation-email" href="mailto:info@delfinasport.com">info@delfinasport.com</a></p>
+                  	{% else %}
+                      <h2 class="h1">{{ section.settings.title }}</h2>
+                      <p class="h4 get-started__subheading">{{ section.settings.subheading }}</p>
+                  	{% endif %}
+				</div>
+			</div>
+
+  			
+		    <a href="{{ section.settings.button_link }}" class="banner--image-container"></a>
+
+
+</div>
+
+<div class="preload">
+   <img src="{{ section.settings.image | img_url: '1024x' }}" width="1" height="1" alt="Image 01" />
+   <img src="{{ section.settings.image_thover | img_url: '1024x'}}" width="1" height="1" alt="Image 02" />
+</div>
+
+{% unless form.posted_successfully? %}
+<div class="page-width">
+  
+  		<div class="get-started__section">
+  
+        {% if section.settings.form_title != blank %}
+          <div class="section-header text-center">
+            <h2>Contact information</h2>
+          </div>
+        {% endif %}
+  
+        <div class="contact-form form-vertical">
+        <div class="grid">
+          <div class="grid__item medium-up--two-thirds medium-up--push-one-sixth">
+
+          <div class="grid grid--half-gutters">
+            <div class="grid__item medium-up--one-half">
+              <label for="{{ formId }}-name" class="visually-hidden">{{ 'contact.form.name' | t }}</label>
+              <input placeholder="First name" type="text" id="{{ formId }}-name" name="contact[name]" value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+            </div>
+            <div class="grid__item medium-up--one-half">
+              <label for="{{ formId }}-lastname" class="visually-hidden">Last name</label>
+              <input placeholder="Last name" type="text" id="{{ formId }}-lastname" name="contact[last name]">
+            </div>
+            <div class="grid__item">
+              <label for="{{ formId }}-team" class="visually-hidden">Team/Club/School Name</label>
+              <input placeholder="Team/Club/School Name" type="text" id="{{ formId }}-team" name="contact[Team]">
+            </div>
+            <div class="grid__item medium-up--one-half">
+              <label for="{{ formId }}-email" class="visually-hidden">{{ 'contact.form.email' | t }} <span aria-hidden="true">*</span></label>
+              <input
+                type="email"
+                placeholder="Email"
+                id="{{ formId }}-email"
+                name="contact[email]"
+                autocorrect="off"
+                autocapitalize="off"
+                value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                aria-required="true"
+                {%- if form.errors contains 'email' -%}
+                  class="input--error"
+                  aria-invalid="true"
+                  aria-describedby="{{ formId }}-email-error"
+                {%- endif -%}
+                >
+              <span id="{{ formId}}-email-error" class="input-error-message">{% include 'icon-error' %} {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}.</span>
+            </div>
+            <div class="grid__item medium-up--one-half">
+              <label for="{{ formId }}-emailconfirmation" class="visually-hidden">{{ 'contact.form.email' | t }} confirmation<span aria-hidden="true">*</span></label>
+              <input
+                type="email"
+                placeholder="Email confirmation"
+                id="{{ formId }}-emailconfirmation"
+                name="contact[email confirmation]"
+                autocorrect="off"
+                autocapitalize="off"
+                value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                aria-required="true"
+                {%- if form.errors contains 'email' -%}
+                  class="input--error"
+                  aria-invalid="true"
+                  aria-describedby="{{ formId }}-email-error"
+                {%- endif -%}
+                >
+              <span id="{{ formId}}-email-error" class="input-error-message">{% include 'icon-error' %} {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}.</span>
+            </div>
+          </div>
+
+          {% comment %}
+          <label for="{{ formId }}-phone">{{ 'contact.form.phone' | t }}</label>
+          <input type="tel" id="{{ formId }}-phone" name="contact[phone]" pattern="[0-9\-]*" value="{% if form[phone] %}{{ form[phone] }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+		  {% endcomment %}
+
+
+          </div>
+        </div>
+  
+  		<div class="get-started__section">
+  		<div class="grid">
+          <div class="grid__item medium-up--one-third medium-up--push-one-third">
+            <div class="section-header text-center">
+              <h2>Choose your products</h2>
+              <p>Select what products you are interested in. No harm in over-choosing if in doubt as we provide a <b>free design service</b>!</p>
+            </div>
+          </div>
+        </div>
+          	<div class="get-started__group">
+              {% assign popup-id = 'range' %}
+              {% assign status-bar-empty = 'No products selected' %}
+              {% assign get-started-cta-text = 'View product range' %}
+              {% assign get-started-popup-range = 'Choose from our range' %}
+              {% include 'get-started--selection-box' %}
+              {% include 'get-started-popup' %}
+            </div>
+  		</div>
+  
+  		<div class="get-started__section">
+          <div class="grid">
+            <div class="grid__item medium-up--one-third medium-up--push-one-third">
+              <div class="section-header text-center">
+                <h2>Colours and design</h2>
+                <p>If you know your official colour codes enter them here (preferred). If you don’t, please choose general colors and request a color chart.</p>
+              </div>
+            </div>
+           </div>
+              
+            <div class="get-started__colors">
+              <div class="grid">
+                {% for i in (1..8) %}
+                <div class="grid__item small--one-quarter medium-up--one-twelfth medium-up--push-two-twelfths">
+                  <div class="get-started__color-item">
+                    <label for="color-{{ i }}" class="visually-hidden">Color {{ i }}</label>
+                    <input type="text" id="color-{{ i }}" placeholder="Color" name="contact[Color {{ i }}]">
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          
+          <div class="grid">
+            <div class="grid__item medium-up--one-third medium-up--push-one-third">
+              <div class="text-center">
+              <p>Please upload your logo (?) *If you can get a logo in the following files it will be super helpful and expedite the process for you: .ai, .PDF, .svg or just as high resolution you can find ☺*</p> 
+             
+				<input class="image-upload" id="FileUpload" type="file"  name="file[Logo]" multiple/>
+                <label for="FileUpload" class="btn custom-file-upload"><img src="{{ 'icon-upload.png' | asset_url }}"><span>Choose a file</span></label>
+                
+				<input class="image-upload" id="FileUpload" type="file"  name="file[Logo-1]" multiple/>
+                <label for="FileUpload" class="btn custom-file-upload"><img src="{{ 'icon-upload.png' | asset_url }}"><span>Choose a file</span></label>
+                
+				<input class="image-upload" id="FileUpload" type="file"  name="file[Logo-2]" multiple/>
+                <label for="FileUpload" class="btn custom-file-upload"><img src="{{ 'icon-upload.png' | asset_url }}"><span>Choose a file</span></label>
+              
+              </div>
+            </div>
+           </div>
+                
+          </div>
+        </div>
+
+  		<div class="get-started__section"> 
+  		<div class="grid">
+          <div class="grid__item medium-up--one-third medium-up--push-one-third">
+            <div class="section-header text-center">
+              <h2>Design Inspiration</h2>
+              <p>If you have any design inspiration (can be anything from the latest Nike shirt to a miscellaneous pattern you have found browsing the internet) please upload the images here.</p>
+              <p>We also have included a gallery of some other customer designs here, so feel free to attach any of these as well if you like their look/theme.</p>
+            </div>
+          </div>
+        </div>
+        <div class="get-started__file-upload">
+            <div class="grid">
+              {% for i in (1..2) %}
+              <div class="grid__item medium-up--one-third medium-up--push-one-sixth">
+                <input class="image-upload" type="file" id="FileUpload" name="file[Image-{{i}}]" multiple>
+                <label for="FileUpload" class="btn btn--full custom-file-upload"><img src="{{ 'icon-upload.png' | asset_url }}"><span>Choose a file</span></label>   
+              </div>
+              {% endfor %}
+            </div>
+            <div class="grid">
+              {% for i in (3..4) %}
+              <div class="grid__item medium-up--one-third medium-up--push-one-sixth">
+                <input class="image-upload" type="file" id="FileUpload" name="file[Image-{{i}}]" multiple>
+                <label for="FileUpload" class="btn btn--full custom-file-upload"><img src="{{ 'icon-upload.png' | asset_url }}"><span>Choose a file</span></label>    
+              </div>
+              {% endfor %}
+            </div>
+        </div>
+          <div class="get-started__group">
+            {% assign popup-id = 'gallery' %}
+            {% assign status-bar-empty = 'No designs selected' %}
+              {% assign get-started-cta-text = 'View the gallery' %}
+              {% assign get-started-popup-range = 'Choose from our gallery' %}
+              {% assign get-started-popup-text = 'Choose some designs you like to narrow the design scope for our expert design team' %}
+        	{% include 'get-started--selection-box' %}
+  			{% include 'get-started-popup' %}
+          </div>
+  		</div>
+          
+        <div class="get-started__section get-started__section--last">  
+          <div class="grid">
+            <div class="grid__item medium-up--one-third medium-up--push-one-third">            
+              <label for="{{ formId }}-message" class="visually-hidden">{{ 'contact.form.message' | t }}</label>
+              <textarea placeholder="{{ 'contact.form.message' | t }}" rows="10" id="{{ formId }}-message" name="contact[body]">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+			  <div class="text-center">
+              	<input type="submit" class="btn" value="{{ 'contact.form.submit' | t }}">
+              </div>
+        	</div>
+          </div>
+        </div>
+
+  		</div>
+
+</div>
+{% endunless %}
+{% endform %}
+
+{% schema %}
+  {
+    "name": "Get started page",
+    "settings": [
+      {
+         "type":      "select",
+         "id":        "text_position",
+         "label":     "Text position",
+         "options": [
+           {
+             "group": "Text position",
+             "value": "left",
+             "label": "Left"
+           },
+           {
+             "group": "Text position",
+             "value": "right",
+             "label": "Right"
+           }
+         ],
+         "default":   "left",
+         "info":      "Left"
+	  },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_hover",
+        "label": "Image on hover"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_text",
+        "label": "Background image"
+      },
+      {
+        "type": "color",
+        "id": "bcg_color",
+        "label": "Background color",
+        "default": "#E0F1FF"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Change the heading"
+      },
+      {
+        "type": "textarea",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam commodo, metus id consectetur congue, ex tortor facilisis nunc, aliquam sollicitudin eros justo ac risus. "
+      },
+      {
+        "type": "header",
+        "content": "Form"
+      },
+      {
+        "type": "text",
+        "id": "form_title",
+        "label": {
+          "de": "Titel",
+          "en": "Heading",
+          "es": "Título",
+          "fr": "En-tête",
+          "it": "Heading",
+          "ja": "見出し",
+          "pt-BR": "Título"
+        },
+        "default": {
+          "de": "Textspalten mit Fotos",
+          "en": "Text column",
+          "es": "Col. de texto con imagen",
+          "fr": "Colonnes de texte avec images",
+          "it": "Colonne di testo con foto",
+          "ja": "画像付きテキスト列",
+          "pt-BR": "Colunas de texto com imagens"
+        }
+      }
+    ],
+  "blocks": [
+    {
+      "type": "text_block",
+      "name": {
+        "de": "Spalte",
+        "en": "Column",
+        "es": "Columna",
+        "fr": "Colonne",
+        "it": "Colonna",
+        "ja": "列",
+        "pt-BR": "Coluna"
+      },
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "enable_image",
+          "label": {
+            "de": "Foto anzeigen",
+            "en": "Show image",
+            "es": "Mostrar imagen",
+            "fr": "Afficher l'image",
+            "it": "Mostra immagine",
+            "ja": "画像を表示する",
+            "pt-BR": "Exibir imagem"
+          },
+          "default": true
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": {
+            "de": "Foto",
+            "en": "Image",
+            "es": "Imagen",
+            "fr": "Image",
+            "it": "Immagine",
+            "ja": "画像",
+            "pt-BR": "Imagem"
+          }
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": {
+            "de": "Titel",
+            "en": "Heading",
+            "es": "Título",
+            "fr": "En-tête",
+            "it": "Heading",
+            "ja": "見出し",
+            "pt-BR": "Título"
+          },
+          "default": {
+            "de": "Titel oder Text hinzufügen",
+            "en": "Add a title or tagline",
+            "es": "Agregar un título o eslogan",
+            "fr": "Ajouter un titre ou un slogan",
+            "it": "Aggiungi un titolo o una tagline",
+            "ja": "タイトルまたはタグラインを追加する",
+            "pt-BR": "Adicione um título ou slogan"
+          }
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": {
+            "de": "Text",
+            "en": "Text",
+            "es": "Texto",
+            "fr": "Texte",
+            "it": "Testo",
+            "ja": "テキスト",
+            "pt-BR": "Texto"
+          },
+          "default": {
+            "de": "<p>Blogposts, Produkte oder Promotions mit Ihren Kunden teilen. Nutzen Sie diesen Text, um Produkte zu beschreiben, Details zu Verfügbarkeit und Stil mitzuteilen oder als Ort, wo Reviews oder FAQs stehen.</p>",
+            "en": "<p>Share blog posts, products, or promotions with your customers. Use this text to describe products, share details on availability and style, or as a space to display recent reviews or FAQs.</p>",
+            "es": "<p>Comparte entradas de blogs, productos o promociones con tus clientes. Usa este texto para describir productos, compartir detalles sobre la disponibilidad y el estilo, o como un espacio para mostrar reseñas recientes o preguntas frecuentes.</p>",
+            "fr": "<p>Partagez des articles de blog, des produits ou des promotions avec vos clients. Utilisez ce texte pour décrire vos produits, partager des détails sur leur disponibilité ou leur style, ou encore pour afficher des FAQ et avis récents.</p>",
+            "it": "<p>Condividi articoli del blog, prodotti o promozioni con i tuoi clienti. Utilizza questo spazio per descrivere i prodotti, condividendo dettagli sulla loro disponibilità e sul loro stile, oppure per mostrare recensioni recenti o domande frequenti.</p>",
+            "ja": "<p>ブログ記事、商品、またはプロモーションをお客様に伝えます。このテキストで商品について説明し、公開状況やスタイルの詳細を共有するか、最近のレビューやFAQを表示するスペースとして使用します。</p>",
+            "pt-BR": "<p>Compartilhe posts de blogs, produtos ou promoções com seus clientes. Use este texto para descrever produtos, compartilhar detalhes sobre disponibilidade e estilo ou como um espaço para exibir comentários recentes ou perguntas frequentes.</p>"
+          }
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": {
+            "de": "Button-Name",
+            "en": "Button label",
+            "es": "Etiqueta de botón",
+            "fr": "Texte du bouton",
+            "it": "Etichetta pulsante",
+            "ja": "ボタンラベル",
+            "pt-BR": "Etiqueta do botão"
+          }
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": {
+            "de": "Button-Link",
+            "en": "Button link",
+            "es": "Enlace de botón",
+            "fr": "Lien du bouton",
+            "it": "Link pulsante",
+            "ja": "ボタンリンク",
+            "pt-BR": "Link do botão"
+          }
+        }
+      ]
+    }
+   ]
+  }
+{% endschema %}

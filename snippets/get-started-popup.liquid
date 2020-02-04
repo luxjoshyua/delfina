@@ -1,0 +1,55 @@
+{% assign collection = popup-id %}
+
+<div id="{{ popup-id }}-popup-id" class="overlay">
+	
+  <div class="popup">
+    
+    <span data-popup-id="#{{ popup-id }}-popup-id" class="popup-trigger">
+    	X
+    </span>
+    
+    <div class="popup__inner">
+    
+      <div class="section-header text-center">
+        <h3>{{ get-started-popup-range }}</h3>
+        {% if get-started-popup-text.size > 0 %}
+        	<p>{{ get-started-popup-text }}</p>
+        {% endif %}
+      </div>
+
+      {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
+      {%- assign max_height = 195 -%}
+
+      <ul class="grid grid--uniform grid--flex">
+        {% if collection == 'range' %}
+          {% for product in collections[collection].products limit: limit %}
+            {% unless product.id == current_product %}
+            <li class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
+              {% include 'get-started-grid', max_height: max_height, collection: collection %}
+            </li>
+            {% endunless %}
+          {% endfor %}
+        {% else %}
+        <div class="grid__item text-center">
+          <div class="gallery-popup-collections is-visible">
+        	{% include 'gallery-list' %}
+          </div>
+          <div class="gallery-popup-products">
+            <div class="go-back">
+              <p>Go back to gallery</p>
+            </div>
+            <div class="grid">
+            
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </ul>
+    </div>
+  
+<!--     <div class="scroll--message">
+      <p>Scroll down for more styles</p>
+    </div> -->
+  </div>
+
+</div>

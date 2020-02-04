@@ -1,0 +1,68 @@
+<div class="page-width">
+  {% include 'page-header' %}
+  <div class="grid">
+    <div class="grid__item medium-up--two-thirds medium-up--push-one-sixth">
+      <div class="contact-form contact-page__form form-vertical">
+        {%- assign formId = 'ContactForm' -%}
+        {% form 'contact', id: formId %}
+          {% include 'form-status-new', form_id: formId %}
+
+          <div class="grid grid--half-gutters">
+             <div class="grid__item medium-up--one-half">
+               <img src="https://cdn.shopify.com/s/files/1/0073/7234/1346/t/5/assets/P395.jpg?557">
+            </div>
+             <div class="grid__item medium-up--one-half">
+               <img src="https://cdn.shopify.com/s/files/1/0073/7234/1346/t/5/assets/IMG_6047_1.JPG?559">
+            </div>
+            <div class="grid__item medium-up--one-whole">
+              <label for="{{ formId }}-name">Name<span aria-hidden="true">*</span></label>
+              <input type="text" id="{{ formId }}-name" name="contact[name]" value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}" required>
+            </div>
+             <div class="grid__item medium-up--one-whole">
+              <label for="{{ formId }}-name">Age<span aria-hidden="true">*</span></label>
+              <input type="text" id="{{ formId }}-name" name="contact[age]" value="{% if form[age] %}{{ form[age] }}{% elsif customer %}{{ customer.age }}{% endif %}" required>
+            </div>
+            <div class="grid__item medium-up--one-whole">
+              <label for="{{ formId }}-email">{{ 'contact.form.email' | t }} <span aria-hidden="true">*</span></label>
+              <input
+                type="email"
+                id="{{ formId }}-email"
+                name="contact[email]"
+                autocorrect="off"
+                autocapitalize="off"
+                value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                aria-required="true"
+                {%- if form.errors contains 'email' -%}
+                  class="input--error"
+                  aria-invalid="true"
+                  aria-describedby="{{ formId }}-email-error"
+                {%- endif -%}
+                >
+              <span id="{{ formId}}-email-error" class="input-error-message">{% include 'icon-error' %} {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}.</span>
+            </div>
+             <div class="grid__item medium-up--one-whole">
+              <label for="{{ formId }}-name">Sport<span aria-hidden="true">*</span></label>
+              <input type="text" id="{{ formId }}-name" name="contact[sport]" value="{% if form[sport] %}{{ form[sport] }}{% elsif customer %}{{ customer.sport }}{% endif %}"  required>
+            </div>
+          <label for="{{ formId }}-message">What are your sporting achievements til now?<span aria-hidden="true">*</span></label>
+          <textarea rows="10" id="{{ formId }}-message" name="contact[sportingachievementstillnow]"  required>{% if form.sportingachievementstillnow %}{{ form.sportingachievementstillnow }}{% endif %}</textarea>
+
+             <label for="{{ formId }}-message">What are your short and long term sporting goals?<span aria-hidden="true">*</span></label>
+          <textarea rows="10" id="{{ formId }}-message" name="contact[shortandlongtermsportinggoals]"  required>{% if form.shortandlongtermsportinggoals %}{{ form.shortandlongtermsportinggoals }}{% endif %}</textarea>
+
+             <label for="{{ formId }}-message">What are your social media pages or handles?<span aria-hidden="true">*</span></label>
+          <textarea rows="10" id="{{ formId }}-message" name="contact[socialmediapagesorhandles]"  required>{% if form.socialmediapagesorhandles %}{{ form.socialmediapagesorhandles }}{% endif %}</textarea>
+
+             <label for="{{ formId }}-message">Tell us in a paragraph or two why you want to be a Delfina Athlete<span aria-hidden="true">*</span></label>
+          <textarea rows="10" id="{{ formId }}-message" name="contact[whyyouwanttoaDelfinaAthelete]"  required>{% if form.whyyouwanttoaDelfinaAthelete %}{{ form.whyyouwanttoaDelfinaAthelete }}{% endif %}</textarea>
+
+            
+          </div>
+
+          <input type="submit" class="btn" value="{{ 'contact.form.submit' | t }}">
+
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</div>

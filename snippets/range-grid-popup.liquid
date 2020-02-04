@@ -1,0 +1,19 @@
+  {% comment %}
+  Get each heading
+  {% endcomment %}
+
+  {% assign content-heading = product.description | split: '<strong>' %}
+  {% assign content-size = content-heading.size | minus:1 %}
+
+
+  <div class="range__grid-popup">
+    
+    {% for i in (1..content-size) %}
+    	{% assign text = content-heading[i] | split: '</strong>' | first %}
+    	<p class="uppercase">{{ text }}</p>
+    {% endfor %}
+    
+    <a href="/pages/get-started" class="btn btn--full btn--primary">Get started</a>
+    <a href="{{ product.url | within: collection }}" class="btn btn--full btn--secondary">Learn more</a>
+  
+  </div>

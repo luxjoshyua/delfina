@@ -1,0 +1,21 @@
+<div class="grid">
+  <div class="grid__item medium-up--two-thirds medium-up--push-one-sixth">
+    <div id="{{ popup-id }}-selected" data-popup="{{ popup-id }}" class="get-started__selection-box">
+      <div class="get-started__status-bar empty">
+        <p>{{ status-bar-empty }}</p>
+      </div>
+      <div class="get-started__status-bar selected">
+        <p>{{ status-bar-empty | remove: 'No ' }}</p>
+      </div>
+      <div class="get-started__selection-box--inner">
+        <p data-popup-id="#{{ popup-id }}-popup-id" class="uppercase get-started__trigger popup-trigger empty-trigger">{{ get-started-cta-text }}</p>
+        <ul class="get-started__selection-box--list">
+        
+        </ul>
+      </div>
+    </div>
+    
+    <p data-popup-id="#{{ popup-id }}-popup-id" class="get-started__trigger uppercase full-trigger popup-trigger">{{ get-started-cta-text }}</p>
+    
+  </div>
+</div>

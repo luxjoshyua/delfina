@@ -1,0 +1,37 @@
+<div class="faq-container">
+  
+    {% for block in section.blocks %}
+    <div class="tabs-block">
+      <p class="tabs-block-title h5">{{ block.settings.title }} <span class="tabs-block-icon tabs-block-trigger">+</span><span class="tabs-block-icon tabs-block-trigger">-</span></p>
+      <div class="tabs-block-text">
+        {{ block.settings.answer }}
+      </div>
+    </div>
+    {% endfor %}
+  
+</div>
+
+{% schema %}
+  {
+    "name": "FAQ",
+    "settings": [],
+    "blocks": [
+        {
+          "type": "select",
+          "name": "Add Question & Answer",
+          "settings": [
+            {
+              "id": "title",
+              "type": "text",
+              "label": "Question"
+            },
+            {
+              "id": "answer",
+              "type": "richtext",
+              "label": "Answer"
+            }
+          ]
+        }
+      ]
+  }
+{% endschema %}
