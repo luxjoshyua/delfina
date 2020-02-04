@@ -16,6 +16,13 @@ Starting build
 Note: will never be working on the live delfina theme in Shopify, it's live meaning changes reflect immediately
 
 
+
+Basic thoughts on approach
+1. custom page for STORES (match store template)
+2. custom collections (user would make a new collection for each store) match - STORECOLLECTION
+3. work out how to add a few theme settings within web app at collections section
+
+
 Resources
 https://www.delfinasport.com/
 https://www.shopify.com.au/partners/blog/95401862-3-simple-steps-for-setting-up-a-local-shopify-theme-development-environment
