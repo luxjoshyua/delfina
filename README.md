@@ -1,0 +1,26 @@
+# delfina
+
+# Starting build
+1. Download build, run 
+2. Check out new branch, named according to feature working on, never push straight to master
+3. Run $ theme watch to start the development server; note it doesn't sync automatically like webpack
+
+ # Steps for deploying pages
+ 1. Checkout branch <whatever feature being worked on>
+ 2. Duplicate theme on app
+ 3. Change theme id in config to duplicated theme id
+ 4. Code
+ 5. Merge with master 
+ 6. Check theme still works
+ 7. Swap theme id to production id <main id>
+
+
+Note: will never be working on the live delfina theme in Shopify, it's live meaning changes reflect immediately
+
+
+# Resources
+https://www.delfinasport.com/
+https://www.shopify.com.au/partners/blog/95401862-3-simple-steps-for-setting-up-a-local-shopify-theme-development-environment
+https://thoughtbot.com/blog/shopify-theme-development?fbclid=IwAR0ZUn1m_uEXkv1xKbmbbxth_ocemwp2rRJ4TmxEirGZ7PKs2YmWbvvLQy4
+
+
