@@ -18,9 +18,12 @@ Note: will never be working on the live delfina theme in Shopify, it's live mean
 
 
 Basic thoughts on approach
-1. custom page for STORES (match store template)
-2. custom collections (user would make a new collection for each store) match - STORECOLLECTION
+1. collection template (collection.collection-team.liquid) is the theme for the team stores
+2. get collection info from page https://help.shopify.com/en/themes/liquid/objects/collection#
 3. work out how to add a few theme settings within web app at collections section
+
+
+4. ? maybe add a custom page page.team-shop.liquid for a list of stores available.
 
 
 Resources
