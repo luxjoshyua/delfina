@@ -6,14 +6,19 @@
 3. Run $ theme watch to start the development server; note it doesn't sync automatically like webpack
 
  # Steps for deploying pages
- 1. Checkout branch <whatever feature being worked on>
- 2. Duplicate theme on app
- 3. Change theme id in config to duplicated theme id
- 4. Code
- 5. Merge with master 
- 6. Check theme still works
- 7. Swap theme id to production id <main id>
-
+ 1. Pull from master and checkout a new branch called `whatever feature being worked on`
+ 2. Login to Shopify store admin
+ 3. Duplicate the published theme theme on app
+ 4. Rename the duplicated theme to the name of your branch
+ 5. Click 'Customise Theme' of your new branch theme
+ 6. Note the theme ID in the URL (e.g. /admin/themes/9542224/settings)
+ 7 .Edit the `theme_id` in `config.yml` to point to your branched theme
+ 8. `theme watch` and do your work
+ 9. Preview work by navigating to that theme in Shopify admin and clicking preview
+ 10. Pull request (can't on private free)
+ 11. Rebase onto master, push to master repo
+ 12. Delete your branch (local and server)
+ 13. Delete your branched theme in Shopify Admin
 
 Note: will never be working on the live delfina theme in Shopify, it's live meaning changes reflect immediately
 
