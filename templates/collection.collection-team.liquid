@@ -1,0 +1,21 @@
+<div class="page-width">
+  {% include 'page-header' %}
+
+    <script src = "{{ 'test.js' | asset_url }}"></script>
+    <h1>hello</h1>
+
+    <h1 id="team-title">{{ collection.title }}</h1>
+    <h1 id="team-title">{{ collection.id }}</h1>
+  
+
+
+  {% for product in collection.products %}
+    
+    <div>
+        <h3>{{ product.title }}</h3>
+        <img src="./{{ product.featured_image }}" />
+        <p>{{ product.description }}</p>
+
+    </div>
+  {% endfor %}
+</div>
