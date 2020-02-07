@@ -1,0 +1,28 @@
+{
+  "name": "Teamlist",
+  "blocks": [
+    {
+      "name": "Team",
+      "type": "text",
+      "settings": [
+        {
+          "id": "teamid",
+          "label": "Team ID",
+          "type": "text",
+          "default": "TEAM ID GOES HERE"
+        },
+        {
+          "id": "main-color",
+          "label": "Main Color",
+          "type": "color",
+          "default": "#fff"
+        },
+        {
+          "id": "main-logo",
+          "label": "Logo",
+          "type": "image_picker"
+        }
+      ]
+    }
+  ]
+}
