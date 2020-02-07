@@ -1,0 +1,46 @@
+
+
+{% schema %}
+{
+  "name": "Teamlist",
+  "blocks": [
+    {
+      "name": "Team",
+      "type": "text",
+      "settings": [
+        {
+          "id": "teamid",
+          "label": "Team ID",
+          "type": "text",
+          "default": "TEAM ID GOES HERE"
+        },
+        {
+          "id": "main_color",
+          "label": "Main Color",
+          "type": "color",
+          "default": "#fff"
+        },
+        {
+          "id": "main_logo",
+          "label": "Logo",
+          "type": "image_picker"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+{% assign teamid = collection.id | downcase %}
+{% for content in section.blocks %}	
+    {% if content.settings.teamid == teamid  %}
+		<style>
+          	.team--bg-primary-color {
+              background: {{ content.settings.main_color }};
+            }
+          
+          	.team--bg-logo {
+              background-image:url({{ content.settings.main_logo | img_url: "400x400" }});
+            }          
+		</style>
+    {% endif %}
+{% endfor %}
