@@ -18,12 +18,15 @@ Note: will never be working on the live delfina theme in Shopify, it's live mean
 
 
 Basic thoughts on approach
-1. collection template (collection.collection-team.liquid) is the theme for the team stores
+1. collection template (temples/collection.collection-team.liquid) is the theme for the team stores
 2. get collection info from page https://help.shopify.com/en/themes/liquid/objects/collection#
-3. work out how to add a few theme settings within web app at collections section
+3. work out how to add a few theme settings within web app at collections section - https://help.shopify.com/en/themes/development/sections#settings
+4. checkout cannot be customized because we are not on SHOPIFY PLUS plan (?) so approach 
+maybe should be user can add anything to cart, but once it is ordered we change the address of anything
+from a team shop to the team address. 
 
 
-4. ? maybe add a custom page page.team-shop.liquid for a list of stores available.
+5. ? maybe add a custom page page.team-shop.liquid for a list of stores available.
 
 
 Resources
