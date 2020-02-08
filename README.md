@@ -7,7 +7,8 @@
 
  # Steps for deploying pages
  1. Pull from master and checkout a new branch called `whatever feature being worked on`
- 2. Login to Shopify store admin
+ 2. Login to Shopify store admin 
+  * https://accounts.shopify.com/lookup?rid=7ef33844-f31d-4824-8c8e-455b9e25eceb
  3. Duplicate the published theme theme on app
  4. Rename the duplicated theme to the name of your branch
  5. Click 'Customise Theme' of your new branch theme
