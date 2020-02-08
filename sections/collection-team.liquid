@@ -48,14 +48,22 @@
 
 <style>
 
-.team--hero {
-    display:flex;
-    
-}
+    .team--hero {
+        display:flex;
+        height:300px;
+        flex-flow:row wrap;
+    }
     .team--logo {
-        width:100%;
-        max-width:100px;
-
+        width:50%;
+        height:100%;
+        background-image:url("https://i.redd.it/4w8jxyi56if41.jpg");
+        background-size:cover;
+        background-position:center;
+    }
+    @media all and (max-width:700px) {
+        .team--logo, .team--title {
+            width:100%;
+        }
     }
 
 </style>
