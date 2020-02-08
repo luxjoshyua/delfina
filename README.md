@@ -10,6 +10,7 @@
  2. Login to Shopify store admin 
   * https://delfina-swimwear.myshopify.com/admin
   * or partners store https://partners.shopify.com/1388545/stores?
+  * or partners login https://delfina-test.myshopify.com/admin/themes
  3. Duplicate the published theme theme on app
  4. Rename the duplicated theme to the name of your branch
  5. Click 'Customise Theme' of your new branch theme
