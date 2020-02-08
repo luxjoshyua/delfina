@@ -24,8 +24,8 @@ Note: will never be working on the live delfina theme in Shopify, it's live mean
 
 
 # Resources
-https://www.delfinasport.com/
-https://www.shopify.com.au/partners/blog/95401862-3-simple-steps-for-setting-up-a-local-shopify-theme-development-environment
-https://thoughtbot.com/blog/shopify-theme-development?fbclid=IwAR0ZUn1m_uEXkv1xKbmbbxth_ocemwp2rRJ4TmxEirGZ7PKs2YmWbvvLQy4
+* https://www.delfinasport.com/
+* https://www.shopify.com.au/partners/blog/95401862-3-simple-steps-for-setting-up-a-local-shopify-theme-development-environment
+* https://thoughtbot.com/blog/shopify-theme-development?fbclid=IwAR0ZUn1m_uEXkv1xKbmbbxth_ocemwp2rRJ4TmxEirGZ7PKs2YmWbvvLQy4
 
 
