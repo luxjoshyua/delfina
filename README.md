@@ -7,7 +7,10 @@
 
  # Steps for deploying pages
  1. Pull from master and checkout a new branch called `whatever feature being worked on`
- 2. Login to Shopify store admin
+ 2. Login to Shopify store admin 
+  * https://delfina-swimwear.myshopify.com/admin
+  * or partners store https://partners.shopify.com/1388545/stores?
+  * or partners login https://delfina-test.myshopify.com/admin/themes
  3. Duplicate the published theme theme on app
  4. Rename the duplicated theme to the name of your branch
  5. Click 'Customise Theme' of your new branch theme
@@ -24,8 +27,8 @@ Note: will never be working on the live delfina theme in Shopify, it's live mean
 
 
 # Resources
-https://www.delfinasport.com/
-https://www.shopify.com.au/partners/blog/95401862-3-simple-steps-for-setting-up-a-local-shopify-theme-development-environment
-https://thoughtbot.com/blog/shopify-theme-development?fbclid=IwAR0ZUn1m_uEXkv1xKbmbbxth_ocemwp2rRJ4TmxEirGZ7PKs2YmWbvvLQy4
+* https://www.delfinasport.com/
+* https://www.shopify.com.au/partners/blog/95401862-3-simple-steps-for-setting-up-a-local-shopify-theme-development-environment
+* https://thoughtbot.com/blog/shopify-theme-development?fbclid=IwAR0ZUn1m_uEXkv1xKbmbbxth_ocemwp2rRJ4TmxEirGZ7PKs2YmWbvvLQy4
 
 
