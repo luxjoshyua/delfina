@@ -5,8 +5,7 @@
     </div>
   {% endif %}
 
-  {%- assign collection = collections[section.settings.collection] -%}
-
+  
   {% case section.settings.grid %}
     {% when 2 %}
       {%- assign max_height = 530 -%}
@@ -25,7 +24,7 @@
   {%- assign product_limit = section.settings.grid | times: section.settings.rows -%}
 
   <ul class="grid grid--uniform grid--view-items">
-    {% for product in collection.products limit: product_limit %}
+    {% for product in collection.products %}
       <li class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
         {% include 'product-card-grid', max_height: max_height %}
       </li>
@@ -41,7 +40,7 @@
               {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
               {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
             </div>
-            <div class="h4 grid-view-item__title" aria-hidden="true">{{ 'homepage.onboarding.product_title' | t }}</div>
+            <div class="h4 grid-view-item__title" aria-hidden="true">{{ product.title }}</div>
             {% include 'product-price' %}
           </div>
         </li>
