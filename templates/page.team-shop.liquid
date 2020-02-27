@@ -1,10 +1,61 @@
 <div class="page-width">
   {% include 'page-header' %}
+    <style>
+        .team-page--teams {
+            display:flex;
+            margin:25px auto;
+            flex-flow:row wrap;
+            width:1300px;
 
+        }
 
-    <h1 id="team-title">{% collection.id %}</h1>
-  <script>  
-    console.log(window.pathname);
+        .team-page--team {
+            width:350px;
+            display:flex;
+            flex-direction:column;
+        }
 
-  </script>
+        .team-page--team .team-banner-outer {
+            overflow:hidden;
+            height:200px;
+        }
+
+        .team-page--team .team-banner {
+            height:100%;
+            background-image:url("https://s3-ap-southeast-2.amazonaws.com/piano.revolutionise.com.au/cups/dwpc/files/8drseu6vjwcamgbq.png");
+            background-size:cover;
+            background-position:center;
+            transform:scale(1);
+            transition:transform 300ms ease;
+        }
+
+        .team-page--team:hover .team-banner {
+            transform:scale(1.1);
+        }
+
+        .team-page--team .team-name {
+            padding:20px;
+            background:#4a94d1;
+            color:white;
+            font-size:18px;
+        }
+
+    </style>
+
+    <div class="team-page--teams">
+{% for link in linklists["Teams"].links %}
+
+    <a class="team-page--team" href="{{link.url}}">
+        <div class="team-banner-outer">
+            <div class="team-banner" style='background-image: url({{ link.object.image | img_url: "600x600" }}) '>
+            </div>
+        </div>
+        
+        <h3 class="team-name">{{link.title }}</h3>
+    </a>
+   {% endfor %}
+
+    </div>
+   
+  
 </div>
