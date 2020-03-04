@@ -21,20 +21,33 @@
           "default": "#fff"
         },
         {
-          "id": "main_logo",
-          "label": "Logo",
-          "type": "image_picker"
+          "id": "password",
+          "label": "Password",
+          "type": "text",
+          "default": "polo123"
         },
         {
-          "id": "main__apparel-types",
-          "label": "Apparel Types",
-          "type": "text"
+          "id": "close_date",
+          "label": "Closing Date - ENDS MIDNIGHT",
+          "type": "text",
+          "default": "DD/MM/YYYY"
+        },
+        {
+          "id": "blurb",
+          "label": "Blurb",
+          "type": "text",
+          "default": "All orders arrive..."
         }
       ]
     }
   ]
 }
 {% endschema %}
+<script>
+var blurb = "";
+var password = "";
+var close_date = "10/10/2030";
+</script>
 {% assign teamid = collection.id | downcase %}
 {% for content in section.blocks %}	
     {% if content.settings.teamid == teamid  %}
@@ -42,13 +55,15 @@
           	.team--bg-primary-color {
               background: {{ content.settings.main_color }};
             }
-          
-          	.team--bg-logo {
-              background-image:url({{ content.settings.main_logo | img_url: "200x200" }});
-              padding-bottom: 16px;
-            }
-
 		</style>
+
+        <script>
+            blurb = "{{ content.settings.blurb }}";
+            password = "{{ content.settings.password }}";
+
+            close_date = "{{ content.settings.close_date }}";
+
+        </script>
     {% endif %}
 {% endfor %}
 
@@ -57,10 +72,10 @@
     .team--hero {
         display:flex;
         height: 380px;
-        flex-flow:row wrap;
     }
     .team--img {
-        width:60%;
+        flex-shrink:0;
+        width:380px;
         height:100%;
         background-size:cover;
         background-position:center;
@@ -73,14 +88,13 @@
     }
     
     .team--title {
-      width: 40%; 
+        flex-grow:1;
+        max-width:1300px;
         align-items: flex-start;
         display:flex;
         flex-direction:column;
-        color:white;
         justify-content: center;
         padding: 50px;
-        background:#0566bb;
         color:white;
     }
 
@@ -104,7 +118,7 @@
     }
 
     .team--countdown h2 {
-        font-size:42px;
+        font-size:30px;
     }
 
 
@@ -115,7 +129,6 @@
         left:0;
         right:0;
         bottom:0;
-        background: #0566bb;
         z-index:50000;
     }
 
@@ -146,7 +159,6 @@
     }
 
     .team--password-box input[type=submit] {
-        background:#0566bb;
         color:white;
         font-weight:800;
     }
@@ -162,13 +174,13 @@
 
 
 
-<div class="team--password-overlay">
+<div class="team--password-overlay team--bg-primary-color">
 
 
-    <div class="team--password-box">
+    <div class="team--password-box team--bg-primary-color">
         <p class="team--password-error">Incorrect password. Try again.</p>
         <input type="password" placeholder="Password" id="team--password" autofocus>
-        <input type = "submit" value="SUBMIT" id="team--submit">
+        <input type = "submit" value="SUBMIT" id="team--submit" class="team--bg-primary-color">
     </div>
 
 </div>
@@ -180,7 +192,7 @@
 //if bad then error
 var teamPasswordInput = document.getElementById("team--password");
 function checkPassword() {
-    if (teamPasswordInput.value === "SYDNEY") {
+    if (teamPasswordInput.value === password) {
         document.querySelector(".team--password-overlay").style.display = "none";
     } else {
         document.querySelector(".team--password-error").style.display = "block";
@@ -198,22 +210,14 @@ teamPasswordInput.addEventListener("keydown", e => {
 </script>
 
 
-<div class="team--hero">
+<div class="team--hero team--bg-primary-color">
     <div class="team--title">
-      <img class="team--bg-logo" src={{content.settings.main_logo}}>
       <h1 class="team--title-h1">{{ collection.title }}</h1>
-      <p>
-        All orders will arrive on February 30 and will be available for collection from Amanie Janes (ajanes1@bigpond.com). 
-        Please note, compulsory Club Items include:
-      </p>
-      <ul> 
-      <li>Water Polo Swimwear</li>
-    <li>Polo Shirt</li>
-    <li>Towel</li>
+      <div id="blurb">
 
-      </ul>
+      </div>
     </div>
-    <div class="team--img team--bg-img">
+    <div class="team--img">
     </div>
 </div>
 
@@ -225,7 +229,8 @@ teamPasswordInput.addEventListener("keydown", e => {
 
 <script>
 //set up time remaining as days hrs mins seconds
-const endDate = new Date("02 / 28 / 2020");
+const transformDate = close_date.split("/");
+const endDate = new Date(transformDate[1] + "/" + transformDate[0] + "/" + transformDate[2]);
 const difference = new Date() - endDate;
 const milisInDay = 1000 * 60 * 60 * 24;
 
@@ -277,7 +282,7 @@ const [seconds, _] = getCountAndRemaining(remainderMinutes, milisInDay / 24 / 60
 countDown(days, hours, minutes, seconds);
 
 
-
+document.getElementById("blurb").innerHTML = blurb;
 
 </script>
 
